@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --page: #f4f7fb;
+  --ink: #17221f;
+  --muted: #7a8581;
+  --line: #e9ece9;
+  --brand-accent: #159a75;
+  --brand-accent-strong: #0d795d;
+  --brand-soft: #e6f5ef;
+  --brand-glow: rgba(21, 154, 117, .18);
+}
+
+* { box-sizing: border-box; }
+html { min-height: 100%; background: var(--page); }
+body { min-height: 100vh; margin: 0; color: var(--ink); background: var(--page); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+::selection { background: #d6ece4; color: #123b34; }
+
+.gt-app, .gt-login-page {
+  position: relative;
+  isolation: isolate;
+  background-image: radial-gradient(ellipse at 88% 2%, rgba(81, 157, 220, .11), transparent 27%), radial-gradient(ellipse at 4% 96%, var(--brand-glow), transparent 30%);
+  transition: background-color .25s ease, color .25s ease;
+}
+.gt-app aside { box-shadow: 10px 0 42px rgba(28, 51, 76, .035); }
+.gt-app header { box-shadow: 0 8px 30px rgba(25, 46, 69, .035); }
+.gt-app main > div > section, .gt-app main section { transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.gt-app main section:hover { box-shadow: 0 12px 34px rgba(28, 51, 76, .055); }
+.gt-brand-mark { background: linear-gradient(145deg, #102b43 0%, #1b6a68 58%, #159a75 100%); box-shadow: 0 10px 24px rgba(17, 72, 75, .25); }
+.gt-brand-star { background: #e6be7a; box-shadow: 0 0 0 4px rgba(230, 190, 122, .16); }
+
+.gt-preferences { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.gt-preference-control { display: inline-flex; align-items: center; gap: 5px; min-height: 35px; border: 1px solid rgba(129, 148, 164, .22); border-radius: 11px; background: rgba(255,255,255,.88); padding: 0 8px; color: #516273; box-shadow: 0 2px 8px rgba(25,46,69,.025); }
+.gt-preference-control select { max-width: 92px; min-width: 0; border: 0; background: transparent; color: inherit; font-size: 10px; font-weight: 700; outline: none; cursor: pointer; }
+.gt-preference-icon { color: var(--brand-accent-strong); font-size: 13px; line-height: 1; }
+.gt-accent-options { display: flex; align-items: center; gap: 5px; padding: 0 2px; }
+.gt-accent-dot { width: 13px; height: 13px; border: 2px solid rgba(255,255,255,.95); border-radius: 50%; background: var(--swatch); box-shadow: 0 0 0 1px rgba(105,122,138,.25); transition: transform .15s ease, box-shadow .15s ease; }
+.gt-accent-dot:hover { transform: scale(1.18); }
+.gt-accent-dot.is-selected { box-shadow: 0 0 0 2px var(--swatch), 0 0 0 4px rgba(100,120,140,.12); transform: scale(1.08); }
+
+.form-control { width: 100%; min-height: 40px; border: 1px solid #e5ebe7; border-radius: 11px; background: #fff; padding: 9px 11px; color: #34423c; font-size: 12px; outline: none; transition: border-color .15s ease, box-shadow .15s ease; }
+.form-control::placeholder { color: #a7b0ab; }
+.form-control:focus { border-color: var(--brand-accent); box-shadow: 0 0 0 3px var(--brand-glow); }
+.form-control:disabled { background: #f4f6f5; color: #9aa39f; }
+
+/* Accent themes */
+[data-accent="emerald"] { --brand-accent: #159a75; --brand-accent-strong: #0d795d; --brand-soft: #e6f5ef; --brand-glow: rgba(21,154,117,.18); }
+[data-accent="ocean"] { --brand-accent: #3988d5; --brand-accent-strong: #2366ad; --brand-soft: #eaf3ff; --brand-glow: rgba(57,136,213,.18); }
+[data-accent="violet"] { --brand-accent: #8964d4; --brand-accent-strong: #6b49b5; --brand-soft: #f0ebff; --brand-glow: rgba(137,100,212,.18); }
+[data-accent="rose"] { --brand-accent: #d45a83; --brand-accent-strong: #ae3e68; --brand-soft: #fff0f5; --brand-glow: rgba(212,90,131,.18); }
+[data-accent="amber"] { --brand-accent: #bd8733; --brand-accent-strong: #93651f; --brand-soft: #fff6e7; --brand-glow: rgba(189,135,51,.18); }
+[data-accent] button[class*="bg-[#155b50]"], [data-accent] [class*="bg-[#15554b]"] { background-color: var(--brand-accent-strong) !important; }
+[data-accent] [class*="text-[#155b50]"], [data-accent] [class*="text-[#196354]"], [data-accent] [class*="text-[#176052]"] { color: var(--brand-accent-strong) !important; }
+[data-accent] [class*="bg-[#eaf3ef]"], [data-accent] [class*="bg-[#e8f0ec]"], [data-accent] [class*="bg-[#f0f5f2]"] { background-color: var(--brand-soft) !important; }
+[data-accent] [class*="border-[#bcd7c8]"], [data-accent] [class*="border-[#cfe2d7]"] { border-color: color-mix(in srgb, var(--brand-accent) 30%, white) !important; }
+
+/* Dark appearance */
+[data-theme="dark"] { color-scheme: dark; --page: #0b1320; --ink: #e9eff7; --line: #263447; }
+[data-theme="dark"].gt-app, [data-theme="dark"] .gt-login-page { background-color: #0b1320 !important; background-image: radial-gradient(ellipse at 88% 2%, rgba(61, 123, 187, .17), transparent 28%), radial-gradient(ellipse at 5% 96%, var(--brand-glow), transparent 30%); color: #e9eff7 !important; }
+[data-theme="dark"] aside, [data-theme="dark"] header, [data-theme="dark"] nav[class*="fixed"], [data-theme="dark"] section[class*="bg-white"], [data-theme="dark"] div[class*="bg-white"] { background-color: #111d2d !important; border-color: #26364b !important; }
+[data-theme="dark"] [class*="bg-[#f"], [data-theme="dark"] [class*="bg-[#e"], [data-theme="dark"] [class*="bg-[#d"] { background-color: #18283a !important; }
+[data-theme="dark"] [class*="border-[#"], [data-theme="dark"] [class*="border-white/80"] { border-color: #2a3b50 !important; }
+[data-theme="dark"] [class*="text-[#1"], [data-theme="dark"] [class*="text-[#2"], [data-theme="dark"] [class*="text-[#3"], [data-theme="dark"] [class*="text-[#4"], [data-theme="dark"] [class*="text-[#5"], [data-theme="dark"] [class*="text-[#6"], [data-theme="dark"] [class*="text-[#7"], [data-theme="dark"] [class*="text-[#8"], [data-theme="dark"] [class*="text-[#9"] { color: #d7e2ef !important; }
+[data-theme="dark"] .form-control { color: #e7eef7 !important; background: #132236 !important; border-color: #344a63 !important; }
+[data-theme="dark"] .form-control::placeholder { color: #8293a8 !important; }
+[data-theme="dark"] .gt-preference-control { background: #142236; border-color: #33475f; color: #d7e2ef; }
+[data-theme="dark"] .gt-preference-control select { color: #e4edf7; }
+[data-theme="dark"] .gt-app aside { box-shadow: 10px 0 42px rgba(0,0,0,.18); }
+[data-theme="dark"] .gt-app header { box-shadow: 0 8px 30px rgba(0,0,0,.15); }
+[data-theme="dark"] .gt-app main section:hover { box-shadow: 0 14px 38px rgba(0,0,0,.2); }
+[data-theme="dark"] button[class*="bg-[#155b50]"], [data-theme="dark"] [class*="bg-[#15554b]"] { color: white !important; }
+[data-theme="dark"] [class*="bg-rose-50"] { background-color: #3b1d2b !important; }
+[data-theme="dark"] [class*="text-rose-7"], [data-theme="dark"] [class*="text-rose-6"] { color: #ff9db4 !important; }
+[data-theme="dark"] .gt-login-page section { background: #111d2d !important; border-color: #26364b !important; }
+[data-theme="dark"] .gt-login-page { color: #e9eff7; }
+
+[dir="rtl"] { text-align: right; }
+[dir="rtl"] .gt-preferences { direction: ltr; }
+[dir="rtl"] aside { left: auto !important; right: 0 !important; border-right: 0 !important; border-left: 1px solid #e9ece9; }
+[dir="rtl"] [class*="md:ml-[252px]"] { margin-left: 0 !important; margin-right: 252px !important; }
+[dir="rtl"] .gt-accent-options { direction: ltr; }
+
+.app-scrollbar::-webkit-scrollbar { width: 7px; height: 7px; }
+.app-scrollbar::-webkit-scrollbar-thumb { border-radius: 999px; background: #d7dfdc; }
+@keyframes soft-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.animate-soft-in { animation: soft-in .35s ease-out both; }
+@media (max-width: 767px) {
+  .mobile-safe-bottom { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .gt-preferences { gap: 4px; }
+  .gt-preference-control { min-height: 33px; padding: 0 6px; }
+  .gt-preference-control select { max-width: 68px; font-size: 9px; }
+  .gt-theme-toggle { min-width: 34px; justify-content: center; padding: 0 8px; }
+  .gt-accent-options { gap: 4px; }
+  .gt-accent-dot { width: 11px; height: 11px; }
+}
+@media (max-width: 430px) {
+  .gt-mobile-brand .gt-brand-copy { display: none; }
+  .gt-preferences { gap: 3px; }
+  .gt-preference-control { padding: 0 5px; }
+  .gt-preference-control select { max-width: 58px; font-size: 9px; }
+  .gt-theme-toggle { min-width: 30px; padding: 0 6px; }
+  .gt-accent-options { gap: 3px; }
+  .gt-accent-dot { width: 10px; height: 10px; }
+}
