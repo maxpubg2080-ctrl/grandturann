@@ -21,9 +21,10 @@ GrandTuran Telegram kanallari va guruhlariga bir xil e’lonni belgilangan jadva
 
 `CRON_SECRET` yaratish uchun terminalda `openssl rand -hex 32` buyrug‘idan foydalaning. Token va parollarni GitHub repository’ga fayl sifatida qo‘shmang; hostingning environment/secret sozlamalarida saqlang.
 
-3. `TELEGRAM_BOT_TOKEN` ni qo‘shib, dashboard’ni oching va **Sozlamalar → Webhook ulash** tugmasini bosing.
-4. Telegram’da botga `/start` yuboring. `BOT_OWNER_ID` hali sozlanmagan bo‘lsa, bot shaxsiy xabarda Telegram ID raqamingizni ko‘rsatadi. Shu ID’ni hosting’da `BOT_OWNER_ID` sifatida saqlab, ilovani qayta ishga tushiring va `/start` ni yana yuboring.
-5. Botni har bir kanalga administrator qilib qo‘shing. Dashboard’da **Kanallar → Kanal qo‘shish** orqali `@username` yoki `-100…` bilan boshlanuvchi chat ID’ni kiriting. Ochiq kanal uchun `https://t.me/username` havolasi ham qabul qilinadi.
+3. Render Web Service → **Settings → Build & Deploy** bo‘limida **Build Command** ni `npm install && npm run db:push && npm run build`, **Start Command** ni `npm start` qilib belgilang. `DATABASE_URL` Environment bo‘limida aynan shu loyihaga tegishli PostgreSQL **Internal Database URL** bo‘lsin. Birinchi deploy vaqtida `db:push` `src/db/schema.ts` dagi `channels`, `campaigns`, `deliveries` va `bot_sessions` jadvallarini bazaga sinxronlaydi. Mavjud bazada qimmatli ma’lumotlar bo‘lsa, avval backup oling.
+4. `TELEGRAM_BOT_TOKEN` ni qo‘shib, dashboard’ni oching va **Sozlamalar → Webhook ulash** tugmasini bosing.
+5. Telegram’da botga `/start` yuboring. `BOT_OWNER_ID` hali sozlanmagan bo‘lsa, bot shaxsiy xabarda Telegram ID raqamingizni ko‘rsatadi. Shu ID’ni hosting’da `BOT_OWNER_ID` sifatida saqlab, ilovani qayta ishga tushiring va `/start` ni yana yuboring.
+6. Botni har bir kanalga administrator qilib qo‘shing. Dashboard’da **Kanallar → Kanal qo‘shish** orqali `@username` yoki `-100…` bilan boshlanuvchi chat ID’ni kiriting. Ochiq kanal uchun `https://t.me/username` havolasi ham qabul qilinadi.
 
 ## 2. GitHub Actions’ga ulash
 
@@ -54,7 +55,7 @@ Bot orqali: `/kanal @kanal_username` — kanal qo‘shish, `/kanal` — kanallar
 cp .env.example .env
 # .env ichiga DATABASE_URL va kerakli development qiymatlarini kiriting
 npm install
-npx drizzle-kit push
+npm run db:push
 npm run dev
 ```
 
